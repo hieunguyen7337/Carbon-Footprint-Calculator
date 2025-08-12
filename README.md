@@ -3,6 +3,17 @@
 
 Assignment: **Software requirements analysis and design (**Full-Stack CRUD Application Development with DevOps Practices**)**
 
+---
+
+**Description**
+
+Calculates environmental impact based on individual or organizational activities to help reduce carbon emissions.
+
+---
+
+**Possible Functionalities**
+
+Tracks personal or company emissions based on travel, utilities, and consumption.
 
 ---
 
