@@ -19,9 +19,13 @@ const ActivityList = ({ activities, setActivities, setEditingActivity }) => {
     <div>
       {activities.map((activity) => (
         <div key={activity._id} className="bg-gray-100 p-4 mb-4 rounded shadow">
-          <h2 className="font-bold">{activity.title}</h2>
-          <p>{activity.description}</p>
-          <p className="text-sm text-gray-500">Date: {new Date(activity.date).toLocaleDateString()}</p>
+          <h2 className="font-bold">{activity.activityType}</h2>
+          <p>
+            <span className="font-semibold">Quantity:</span> {activity.quantity} {activity.unit}
+          </p>
+          <p>
+            <span className="font-semibold">Date:</span> {new Date(activity.date).toLocaleDateString()}
+          </p>
           <div className="mt-2">
             <button
               onClick={() => setEditingActivity(activity)}
