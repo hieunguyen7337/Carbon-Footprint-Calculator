@@ -33,6 +33,9 @@ const ActivityForm = ({ activities, setActivities, editingActivity, setEditingAc
   });
   const [errors, setErrors] = useState({});
 
+  // Calculate today's date in 'YYYY-MM-DD' format
+  const today = new Date().toISOString().split('T')[0];
+
   useEffect(() => {
     if (editingActivity) {
       setFormData({
@@ -48,7 +51,6 @@ const ActivityForm = ({ activities, setActivities, editingActivity, setEditingAc
 
   const validateForm = () => {
     let newErrors = {};
-    const today = new Date().toISOString().split('T')[0];
 
     // Activity Type validation
     if (!formData.activityType.trim()) {
@@ -63,11 +65,6 @@ const ActivityForm = ({ activities, setActivities, editingActivity, setEditingAc
     // Unit validation
     if (!formData.unit.trim()) {
       newErrors.unit = 'Unit is required.';
-    }
-
-    // Date validation (cannot be in the future)
-    if (formData.date && formData.date > today) {
-      newErrors.date = 'Date cannot be in the future.';
     }
 
     setErrors(newErrors);
@@ -174,6 +171,7 @@ const ActivityForm = ({ activities, setActivities, editingActivity, setEditingAc
         value={formData.date}
         onChange={handleChange}
         className={`w-full mb-2 p-2 border rounded ${errors.date ? 'border-red-500' : ''}`}
+        max={today}
       />
       {errors.date && <p className="text-red-500 text-sm mb-4">{errors.date}</p>}
 
