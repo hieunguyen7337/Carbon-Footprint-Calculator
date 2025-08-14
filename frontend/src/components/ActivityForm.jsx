@@ -29,7 +29,7 @@ const ActivityForm = ({ activities, setActivities, editingActivity, setEditingAc
     activityType: '',
     quantity: '',
     unit: '',
-    deadline: '',
+    date: '',
   });
   const [errors, setErrors] = useState({});
 
@@ -39,10 +39,10 @@ const ActivityForm = ({ activities, setActivities, editingActivity, setEditingAc
         activityType: editingActivity.activityType,
         quantity: editingActivity.quantity,
         unit: editingActivity.unit,
-        deadline: editingActivity.deadline ? editingActivity.deadline.split('T')[0] : '',
+        date: editingActivity.date ? editingActivity.date.split('T')[0] : '',
       });
     } else {
-      setFormData({ activityType: '', quantity: '', unit: '', deadline: '' });
+      setFormData({ activityType: '', quantity: '', unit: '', date: '' });
     }
   }, [editingActivity]);
 
@@ -65,9 +65,9 @@ const ActivityForm = ({ activities, setActivities, editingActivity, setEditingAc
       newErrors.unit = 'Unit is required.';
     }
 
-    // Deadline validation
-    if (formData.deadline && formData.deadline < today) {
-      newErrors.deadline = 'Deadline cannot be in the past.';
+    // Date validation (cannot be in the future)
+    if (formData.date && formData.date > today) {
+      newErrors.date = 'Date cannot be in the future.';
     }
 
     setErrors(newErrors);
@@ -108,7 +108,7 @@ const ActivityForm = ({ activities, setActivities, editingActivity, setEditingAc
         setActivities([...activities, response.data]);
       }
       setEditingActivity(null);
-      setFormData({ activityType: '', quantity: '', unit: '', deadline: '' });
+      setFormData({ activityType: '', quantity: '', unit: '', date: '' });
       alert('Activity saved successfully.');
     } catch (error) {
       alert('Failed to save activity.');
@@ -150,7 +150,7 @@ const ActivityForm = ({ activities, setActivities, editingActivity, setEditingAc
       />
       {errors.quantity && <p className="text-red-500 text-sm mb-4">{errors.quantity}</p>}
 
-      {/* Unit Dropdown (conditionally rendered) */}
+      {/* Unit Dropdown */}
       {formData.activityType && units[formData.activityType] && (
         <select
           name="unit"
@@ -170,12 +170,12 @@ const ActivityForm = ({ activities, setActivities, editingActivity, setEditingAc
       {/* Date */}
       <input
         type="date"
-        name="deadline"
-        value={formData.deadline}
+        name="date"
+        value={formData.date}
         onChange={handleChange}
-        className={`w-full mb-2 p-2 border rounded ${errors.deadline ? 'border-red-500' : ''}`}
+        className={`w-full mb-2 p-2 border rounded ${errors.date ? 'border-red-500' : ''}`}
       />
-      {errors.deadline && <p className="text-red-500 text-sm mb-4">{errors.deadline}</p>}
+      {errors.date && <p className="text-red-500 text-sm mb-4">{errors.date}</p>}
 
       <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded mt-4">
         {editingActivity ? 'Update Activity' : 'Add Activity'}

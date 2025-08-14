@@ -24,7 +24,7 @@ describe('Activity Controller Tests', () => {
           activityType: 'Travel',
           quantity: 100,
           unit: 'km',
-          deadline: '2025-12-31'
+          date: '2025-12-31'
         }
       };
 
@@ -66,7 +66,7 @@ describe('Activity Controller Tests', () => {
           activityType: 'Travel',
           quantity: 100,
           unit: 'km',
-          deadline: '2025-12-31'
+          date: '2025-12-31'
         }
       };
 

@@ -16,9 +16,9 @@ const getActivities = async (req, res) => {
 // @route   POST /api/activities
 // @access  Private
 const addActivity = async (req, res) => {
-  const { activityType, quantity, unit, deadline } = req.body;
+  const { activityType, quantity, unit, date } = req.body;
   try {
-    const activity = await Activity.create({ userId: req.user.id, activityType, quantity, unit, deadline });
+    const activity = await Activity.create({ userId: req.user.id, activityType, quantity, unit, date });
     res.status(201).json(activity);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -29,7 +29,7 @@ const addActivity = async (req, res) => {
 // @route   PUT /api/activities/:id
 // @access  Private
 const updateActivity = async (req, res) => {
-  const { activityType, quantity, unit, deadline } = req.body;
+  const { activityType, quantity, unit, date } = req.body;
   try {
     const activity = await Activity.findById(req.params.id);
     if (!activity) return res.status(404).json({ message: 'Activity not found' });
@@ -42,7 +42,7 @@ const updateActivity = async (req, res) => {
     activity.activityType = activityType || activity.activityType;
     activity.quantity = quantity ?? activity.quantity; // Use ?? for null/undefined check
     activity.unit = unit || activity.unit;
-    activity.deadline = deadline || activity.deadline;
+    activity.date = date || activity.date;
 
     const updatedActivity = await activity.save();
     res.json(updatedActivity);

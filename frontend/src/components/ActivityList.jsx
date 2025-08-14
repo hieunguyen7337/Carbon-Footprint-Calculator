@@ -21,7 +21,7 @@ const ActivityList = ({ activities, setActivities, setEditingActivity }) => {
         <div key={activity._id} className="bg-gray-100 p-4 mb-4 rounded shadow">
           <h2 className="font-bold">{activity.title}</h2>
           <p>{activity.description}</p>
-          <p className="text-sm text-gray-500">Deadline: {new Date(activity.deadline).toLocaleDateString()}</p>
+          <p className="text-sm text-gray-500">Date: {new Date(activity.date).toLocaleDateString()}</p>
           <div className="mt-2">
             <button
               onClick={() => setEditingActivity(activity)}
