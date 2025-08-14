@@ -90,5 +90,52 @@ describe('Activity Controller Tests', () => {
     });
   });
 
+  // --- Test Suite for getActivities ---
+  describe('getActivities Function Test', () => {
+    it('should return all activities for the authenticated user', async () => {
+      const userId = new mongoose.Types.ObjectId();
+      const mockActivities = [
+        { _id: new mongoose.Types.ObjectId(), userId, activityType: 'Travel', quantity: 50, unit: 'km' },
+        { _id: new mongoose.Types.ObjectId(), userId, activityType: 'Electricity', quantity: 200, unit: 'kWh' },
+      ];
+
+      // Stub Activity.find to return the mock activities
+      const findStub = sinon.stub(Activity, 'find').resolves(mockActivities);
+
+      const req = { user: { id: userId } };
+      const res = {
+        json: sinon.spy(),
+        status: sinon.stub().returnsThis()
+      };
+
+      await getActivities(req, res);
+
+      // Assertions
+      expect(findStub.calledOnceWith({ userId: req.user.id })).to.be.true;
+      expect(res.json.calledWith(mockActivities)).to.be.true;
+      expect(res.status.notCalled).to.be.true; // Status not set for success (defaults to 200)
+
+      findStub.restore();
+    });
+
+    it('should return 500 if an error occurs during retrieval', async () => {
+      // Stub Activity.find to throw an error
+      const findStub = sinon.stub(Activity, 'find').throws(new Error('DB connection error'));
+
+      const req = { user: { id: new mongoose.Types.ObjectId() } };
+      const res = {
+        json: sinon.spy(),
+        status: sinon.stub().returnsThis()
+      };
+
+      await getActivities(req, res);
+
+      // Assertions
+      expect(res.status.calledWith(500)).to.be.true;
+      expect(res.json.calledWithMatch({ message: 'DB connection error' })).to.be.true;
+
+      findStub.restore();
+    });
+  });
 
 });
