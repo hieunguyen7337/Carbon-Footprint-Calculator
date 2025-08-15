@@ -59,7 +59,7 @@ Once the application is running, the frontend will be accessible at `http://loca
 
 ## Public URL of the Project
 
-**Public URL**: `http://13.236.136.12/`
+**Public URL**: `http://16.176.219.62/`
 
 ## Access Credentials
 
