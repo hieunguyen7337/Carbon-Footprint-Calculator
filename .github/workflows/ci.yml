@@ -3,8 +3,9 @@ name: Backend CI
 on:
   push:
     branches:
-      - main  # Trigger CI on pushes to the main branch
-
+      - main
+    paths-ignore:
+      - 'README.md'
 
 jobs:
   test:
