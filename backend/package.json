@@ -1,5 +1,5 @@
 {
-  "name": "task-manager-backend",
+  "name": "Carbon-Footprint-Calculator-backend",
   "version": "1.0.0",
   "description": "Backend for Task Manager App",
   "main": "server.js",
@@ -19,7 +19,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.14",
     "request": "^2.88.2",
-    "task-manager": "file:.."
+    "Carbon-Footprint-Calculator": "file:.."
   },
   "devDependencies": {
     "esm": "^3.2.25",
