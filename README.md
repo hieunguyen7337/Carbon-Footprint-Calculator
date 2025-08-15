@@ -63,4 +63,4 @@ Once the application is running, the frontend will be accessible at `http://loca
 
 ## Access Credentials
 
-A project-specific username and password will be provided if required for dashboard access. For local development, you can register a new user through the application's registration page.
+The development email and password can be provided upon request for dashboard access. For testing purposes, you may also register a new user through the application's registration page.
