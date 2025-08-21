@@ -9,7 +9,6 @@ const Activity = require('../models/Activity');
 const { addActivity, getActivities, updateActivity, deleteActivity } = require('../controllers/activityController'); // Import activity controller functions
 const { expect } = chai;
 
-
 chai.use(chaiHttp);
 
 describe('Activity Controller Tests', () => {
